@@ -129,3 +129,26 @@ function updateStrengthMeter(password) {
   strengthBar.style.backgroundColor = barColor;
   strengthLabel.textContent = strengthLabelText;
 }
+
+window.addEventListener("DOMContentLoaded", makePassword);
+
+copyButton.addEventListener("click", () => {
+  if (!passwordInput.value) return;
+
+  navigator.clipboard
+    .writeText(passwordInput.value)
+    .then(() => showCopySuccess())
+    .catch((error) => console.log("Could not copy:", error));
+});
+
+function showCopySuccess() {
+  copyButton.classList.remove("far", "fa-copy");
+  copyButton.classList.add("fas", "fa-check");
+  copyButton.style.color = "#48bb78";
+
+  setTimeout(() => {
+    copyButton.classList.remove("fas", "fa-check");
+    copyButton.classList.add("far", "fa-copy");
+    copyButton.style.color = "";
+  }, 1500);
+}
